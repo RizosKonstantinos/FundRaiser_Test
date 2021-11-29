@@ -1,0 +1,15 @@
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/bin/Debug/net5.0/FundRaiser.Common.deps.json
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/bin/Debug/net5.0/FundRaiser.Common.runtimeconfig.json
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/bin/Debug/net5.0/FundRaiser.Common.runtimeconfig.dev.json
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/bin/Debug/net5.0/FundRaiser.Common.dll
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/bin/Debug/net5.0/ref/FundRaiser.Common.dll
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/bin/Debug/net5.0/FundRaiser.Common.pdb
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.csproj.AssemblyReference.cache
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.GeneratedMSBuildEditorConfig.editorconfig
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.AssemblyInfoInputs.cache
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.AssemblyInfo.cs
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.csproj.CoreCompileInputs.cache
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.dll
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/ref/FundRaiser.Common.dll
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.pdb
+/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Common/obj/Debug/net5.0/FundRaiser.Common.genruntimeconfig.cache
