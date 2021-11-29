@@ -32,14 +32,11 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+bin/
+
 
 # Visual Studio 2015
 .vs/
+.idea/
+obj
 
-# Volumes
-/storage
-/logs
-/ips
-
-#Migrations folder
-**/Migrations/
