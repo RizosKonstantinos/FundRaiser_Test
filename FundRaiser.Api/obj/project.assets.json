@@ -5998,7 +5998,7 @@
     ]
   },
   "packageFolders": {
-    "/home/arx-dev-3b-19/.nuget/packages/": {}
+    "/root/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
@@ -6006,11 +6006,11 @@
       "projectUniqueName": "/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Api/FundRaiser.Api.csproj",
       "projectName": "FundRaiser.Api",
       "projectPath": "/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Api/FundRaiser.Api.csproj",
-      "packagesPath": "/home/arx-dev-3b-19/.nuget/packages/",
+      "packagesPath": "/root/.nuget/packages/",
       "outputPath": "/home/arx-dev-3b-19/Desktop/FundRaiser/FundRaiser.Api/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/arx-dev-3b-19/.nuget/NuGet/NuGet.Config"
+        "/root/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
