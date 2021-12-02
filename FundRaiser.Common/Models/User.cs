@@ -9,7 +9,7 @@ namespace FundRaiser.Common.Models
 
         //Base properties
         public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string LastName { get; set; }       
         
         //Navigation properties 
         public List<Project> Projects { get; set; }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FundRaiser.Common.Models;
@@ -15,6 +16,12 @@ namespace FundRaiser.Common.Dto
             Title = project.Title;
             Description = project.Description;
             Category = project.Category;
+            Goal = project.Goal;
+            CurrentAmount = project.CurrentAmount;
+            IsComplited = project.IsComplited;
+            StartDate = project.StartDate;
+            EndTime = project.EndTime;
+            NumberOfBackers = project.NumberOfBackers;
             
             //Check Rewards collection 
             if (project.Rewards != null)
@@ -33,7 +40,13 @@ namespace FundRaiser.Common.Dto
         public int UserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public Category? Category { get; set; }
+        public Category Category { get; set; }
+        public decimal? Goal { get; set; }
+        public decimal? CurrentAmount { get; set; }
+        public bool IsComplited { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime? EndTime { get; set; }
+        public int NumberOfBackers { get; set; }
         public IEnumerable<RewardDto> Rewards { get; set; }
         public IEnumerable<UpdateDto> Updates { get; set; }
         public IEnumerable<MediaDto> Media { get; set; }

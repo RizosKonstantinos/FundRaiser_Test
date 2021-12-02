@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using FundRaiser.Common.Dto;
+using FundRaiser.Common.Models;
 using FundRaiser.Common.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -37,10 +38,10 @@ namespace FundRaiser.Api.Controllers
         public async Task<IEnumerable<ProjectDto>> GetProjects(int pageCount = 1, int pageSize = 10)
         {
             var projectsFromDb = await _projectService.GetProjects(pageCount, pageSize);
-            
+
             return projectsFromDb.Select(p => new ProjectDto(p));
         }
-        
+
         [HttpGet("getUserProjects")]
         public async Task<IEnumerable<ProjectDto>> UserProjects(int pageCount, int pageSize, int userId)
         {

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace FundRaiser.Common.Models
 {
     public class Media

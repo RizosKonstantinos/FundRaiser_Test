@@ -11,9 +11,9 @@ namespace FundRaiser.Common.Services
 {
     public interface IProjectService
     {
-        Task<Project> Add(ProjectDto dto);
-        Task<Project> Update(int id, ProjectDto dto);
-        Task<bool> Delete(int id);
+        Task<Project> Add(Project projectModel); 
+        Task<Project> Update(int id, Project projectModel); 
+        Task<bool> Delete(int id); //Delete
         Task<Project> GetProject(int id, bool baseInfo = true);
         Task<List<Project>> GetProjects(int pageCount, int pageSize, int? userId = null, string title = null, Category? category = null);
         Task<List<Project>> GetFundedProjects(int userId);
@@ -29,33 +29,43 @@ namespace FundRaiser.Common.Services
             _context = context;
         }
 
-        public async Task<Project> Add(ProjectDto dto)
+        public async Task<Project> Add(Project projectModel)
         {
-            var project = new Project 
-            { 
+            var project = new Project
+            {
                 //Map base info
-                Title = dto.Title, 
-                UserId = dto.UserId,
-                Description = dto.Description,
-                Category = (Category)dto.Category
+                Title = projectModel.Title,
+                UserId = projectModel.UserId,
+                Description = projectModel.Description,
+                Category = (Category)projectModel.Category,
+                Goal = (decimal)projectModel.Goal,
+                CurrentAmount = (decimal)projectModel.CurrentAmount,
+                StartDate = projectModel.StartDate,
+                EndTime = (DateTime)projectModel.EndTime,
+                IsComplited = projectModel.IsComplited,
+                NumberOfBackers = projectModel.NumberOfBackers                 
             };
 
-            await _context.AddAsync(project);
+            await _context.Projects.AddAsync(project);
             await _context.SaveChangesAsync();
 
             return project;
         }
         
-        public async Task<Project> Update(int id, ProjectDto dto)
+        public async Task<Project> Update(int id, Project projectModel)
         {
             var project = await _context.Projects.FirstOrDefaultAsync(p => p.Id == id);
 
             //Map base info
-            project.Title = dto.Title ?? project.Title;
-            project.Category = dto.Category ?? project.Category;
+            project.Title = projectModel.Title ?? project.Title;
+            project.Category = projectModel.Category;
+            project.Description = projectModel.Description ?? project.Description;
+            project.Goal = projectModel.Goal;
+            project.EndTime = projectModel.EndTime;
+
             //project.UserId = dto.UserId == 0 ? project.UserId : dto.UserId;
             
-            await _context.AddAsync(project);
+            await _context.Projects.AddAsync(project);
             await _context.SaveChangesAsync();
 
             return project;
@@ -67,7 +77,7 @@ namespace FundRaiser.Common.Services
 
             if (project == null) return false;
 
-            _context.Remove(project);
+            _context.Projects.Remove(project);
             await _context.SaveChangesAsync();
             return true;
         }
@@ -116,5 +126,14 @@ namespace FundRaiser.Common.Services
                 .Where(f => f.Reward.ProjectId == projectId)
                 .SumAsync(r => r.Reward.RequiredAmount);
         }
+
+        //public async Task<int> GetNumberOfBackers(int projectId)
+        //{
+        //    return await _context.Funds
+        //        .Include(f=>f.Reward)
+        //        .Where(f => f.Reward.ProjectId == projectId)
+        //        .
+                 
+        //}
     }
 }

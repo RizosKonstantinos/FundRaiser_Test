@@ -8,10 +8,10 @@ namespace FundRaiser.Common.Services
 {
     public interface IUserService
     {
-        Task<UserDto> Add(UserDto dto);
-        Task<UserDto> Update(int id, UserDto dto);
+        Task<User> Add(User userModel);
+        Task<User> Update(int id, User userModel);
         Task<bool> Delete(int id);
-        Task<UserDto> GetUser(int id, bool baseInfo = true);
+        Task<User> GetUser(int id, bool baseInfo = true);
     }
     
     public class UserService : IUserService
@@ -23,33 +23,33 @@ namespace FundRaiser.Common.Services
             _context = context;
         }
 
-        public async Task<UserDto> Add(UserDto dto)
+        public async Task<User> Add(User userModel)
         {
             var user = new User() 
             { 
                 //Map base info
-                FirstName = dto.FirstName, 
-                LastName = dto.LastName
+                FirstName = userModel.FirstName, 
+                LastName = userModel.LastName
             };
 
-            await _context.AddAsync(user);
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            return new UserDto(user);
+            return user;
         }
         
-        public async Task<UserDto> Update(int id, UserDto dto)
+        public async Task<User> Update(int id, User userModel)
         {
             var user = await _context.Users.FirstOrDefaultAsync(p => p.Id == id);
 
             //Map base info
-            user.FirstName = dto.FirstName ?? user.FirstName;
-            user.LastName = dto.LastName ?? user.LastName;
+            user.FirstName = userModel.FirstName ?? user.FirstName;
+            user.LastName = userModel.LastName ?? user.LastName;
             
-            await _context.AddAsync(user);
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
 
-            return new UserDto(user);
+            return user;
         }
 
         public async Task<bool> Delete(int id)
@@ -58,12 +58,12 @@ namespace FundRaiser.Common.Services
 
             if (user == null) return false;
 
-            _context.Remove(user);
+            _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return true;
         }
 
-        public async Task<UserDto> GetUser(int id, bool baseInfo = true)
+        public async Task<User> GetUser(int id, bool baseInfo = true)
         {
             var user = baseInfo 
                 ? await _context.Users.FirstOrDefaultAsync(p => p.Id == id)
@@ -72,7 +72,7 @@ namespace FundRaiser.Common.Services
                     .Include(u => u.Funds)
                     .FirstOrDefaultAsync(u => u.Id == id);
 
-            return user != null ? new UserDto(user) : null;
+            return user != null ? user : null;          
         }
     }
 }

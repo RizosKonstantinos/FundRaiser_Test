@@ -4,12 +4,17 @@ using System.Threading.Tasks;
 using FundRaiser.Common.Data;
 using FundRaiser.Common.Dto;
 using FundRaiser.Common.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FundRaiser.Common.Services
 {
     public interface IRewardService
     {
-        Task<IEnumerable<Reward>> Add(List<RewardDto> dtos);
+        Task<Reward> Create(Reward rewardModel); // Create
+        Task<Reward> Update(int id, Reward rewardModel); // Update
+        Task<bool> Delete(int id);
+        Task<List<Reward>> GetRewards(int projectId);
+        Task<Reward> GetRewardsByProject(int userId, int projectId);
     }
 
     public class RewardService : IRewardService
@@ -21,20 +26,77 @@ namespace FundRaiser.Common.Services
             _context = context;
         }
         
-        public async Task<IEnumerable<Reward>> Add(List<RewardDto> dtos)
+        public async Task<Reward> Create(Reward rewardModel)
         {
-            var rewards = dtos.Select(dto => new Reward
+            var reward = new Reward()
             {
-                Description = dto.Description,
-                ProjectId = dto.ProjectId,
-                Title = dto.Title,
-                RequiredAmount = dto.RequiredAmount
-            });
+                Title = rewardModel.Title,
+                Description = rewardModel.Description,
+                RequiredAmount = (decimal)rewardModel.RequiredAmount, 
+            };
 
-            await _context.AddRangeAsync(rewards);
+            await _context.Rewards.AddAsync(reward);
             await _context.SaveChangesAsync();
 
-            return rewards;
+            return reward;
+        }
+
+       
+        public async Task<Reward> Update(int id, Reward rewardModel)
+        {
+            var reward = await _context.Rewards.FirstOrDefaultAsync(p => p.Id == id);
+
+            reward.Title = rewardModel.Title ?? reward.Title;
+            reward.Description = rewardModel.Description ?? reward.Description;
+            reward.RequiredAmount = rewardModel.RequiredAmount;
+
+            await _context.Rewards.AddAsync(reward);
+            await _context.SaveChangesAsync();
+
+            return reward;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var reward = await _context.Rewards.FirstOrDefaultAsync(r=>r.Id == id);
+
+            if (reward == null) return false;
+
+            _context.Rewards.Remove(reward);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<List<Reward>> GetRewards(int projectId)
+        {
+            return await _context.Rewards
+                .Where(r => r.ProjectId == projectId)
+                .ToListAsync();
+        }
+
+        public async  Task<Reward> GetRewardsByProject(int userId, int projectId)
+        {
+            //return await _context.Funds
+            //     .Include(r => r.Reward)
+            //     .Where(r => r.UserId == userId && r.Reward.ProjectId == projectId)
+            //     .SingleOrDefaultAsync();
+
+            //return await _context.Rewards
+            //    .Include(f => f.Funds)
+            //    .Include
+                
+
+
+
+
+            //Select * 
+            //from Rewards
+            //join Funds on Rewards.id == Funds.RewardsId
+            //where ProjectId == projectId AND FundUserId == userId;
+
+
+
         }
     }
 }

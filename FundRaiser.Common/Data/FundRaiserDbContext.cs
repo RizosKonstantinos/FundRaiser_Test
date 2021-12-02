@@ -15,8 +15,9 @@ namespace FundRaiser.Common.Data
         public DbSet<Fund> Funds { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server = localhost; Initial Catalog = 'FundRaiser'; User Id = SA; Password=123456Ab");
+        {      
+           // optionsBuilder.UseSqlServer("Server = localhost; Initial Catalog = 'FundRaiser'; User Id = SA; Password=123456Ab");
+            optionsBuilder.UseSqlServer("Data Source = DESKTOP-UIO6ESD\\SQLSERVER2019; Initial Catalog = Charalampos_FundRaiser; Integrated Security = True");
         }
         
         public FundRaiserDbContext() : base() { }
