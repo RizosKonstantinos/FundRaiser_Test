@@ -14,7 +14,7 @@ namespace FundRaiser.Common.Services
         Task<Reward> Update(int id, Reward rewardModel); // Update
         Task<bool> Delete(int id);
         Task<List<Reward>> GetRewards(int projectId);
-        Task<Reward> GetRewardsByProject(int userId, int projectId);
+        Task<List<Reward>> GetBackerRewards(int userId, int projectId);
     }
 
     public class RewardService : IRewardService
@@ -75,28 +75,13 @@ namespace FundRaiser.Common.Services
                 .ToListAsync();
         }
 
-        public async  Task<Reward> GetRewardsByProject(int userId, int projectId)
+        public async Task<List<Reward>> GetBackerRewards(int userId, int projectId)
         {
-            //return await _context.Funds
-            //     .Include(r => r.Reward)
-            //     .Where(r => r.UserId == userId && r.Reward.ProjectId == projectId)
-            //     .SingleOrDefaultAsync();
-
-            //return await _context.Rewards
-            //    .Include(f => f.Funds)
-            //    .Include
-                
-
-
-
-
-            //Select * 
-            //from Rewards
-            //join Funds on Rewards.id == Funds.RewardsId
-            //where ProjectId == projectId AND FundUserId == userId;
-
-
-
+            return await _context.Funds
+                .Include(f => f.Reward)
+                .Where(f => f.UserId == userId && f.Reward.ProjectId == projectId)
+                .Select(f => f.Reward)
+                .ToListAsync();
         }
     }
 }

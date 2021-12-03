@@ -72,7 +72,7 @@ namespace FundRaiser.Common.Services
                     .Include(u => u.Funds)
                     .FirstOrDefaultAsync(u => u.Id == id);
 
-            return user != null ? user : null;          
+            return user;          
         }
     }
 }

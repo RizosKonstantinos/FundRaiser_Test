@@ -38,8 +38,7 @@ namespace FundRaiser.Common.Services
                 UserId = projectModel.UserId,
                 Description = projectModel.Description,
                 Category = (Category)projectModel.Category,
-                Goal = (decimal)projectModel.Goal,
-                CurrentAmount = (decimal)projectModel.CurrentAmount,
+                Goal = (decimal)projectModel.Goal,           
                 StartDate = projectModel.StartDate,
                 EndTime = (DateTime)projectModel.EndTime,
                 IsComplited = projectModel.IsComplited,
@@ -62,8 +61,7 @@ namespace FundRaiser.Common.Services
             project.Description = projectModel.Description ?? project.Description;
             project.Goal = projectModel.Goal;
             project.EndTime = projectModel.EndTime;
-
-            //project.UserId = dto.UserId == 0 ? project.UserId : dto.UserId;
+                        
             
             await _context.Projects.AddAsync(project);
             await _context.SaveChangesAsync();
